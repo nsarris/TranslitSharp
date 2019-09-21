@@ -4,21 +4,24 @@ image: Visual Studio 2019
 
 pull_requests:
   do_not_increment_build_number: true
-branches:
-  only:
-  - master
-  - develop
 
 nuget:
   disable_publish_on_pr: true
 
+ branches:
+  only:
+  - master
+  - develop
+  
+skip_commits:
+  files:
+    - LICENSE
+    - README.md
+	
 environment:
-  # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  # Disable sending usage data to Microsoft
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
-# `install` will run before `build_script`
 install:
   - ps: dotnet tool install --global Cake.Tool --version 0.34.1
 
@@ -29,7 +32,6 @@ build_script:
   - ps: dotnet cake build.cake --pack
 
 assembly_info:
-  # We'll version the binaries and the NuGet package in the build script
   patch: false
 
 test: on
