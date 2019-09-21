@@ -1,0 +1,57 @@
+version: '{build}'
+
+image: Visual Studio 2019
+
+pull_requests:
+  do_not_increment_build_number: true
+branches:
+  only:
+  - master
+  - develop
+
+nuget:
+  disable_publish_on_pr: true
+
+environment:
+  # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  # Disable sending usage data to Microsoft
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+# `install` will run before `build_script`
+install:
+  - ps: dotnet tool install --global Cake.Tool --version 0.34.1
+
+configuration: Release
+
+build_script:
+  - ps: dotnet cake build.cake --bootstrap
+  - ps: dotnet cake build.cake --pack
+
+assembly_info:
+  # We'll version the binaries and the NuGet package in the build script
+  patch: false
+
+test: on
+
+artifacts:
+- path: .\artifacts\**\*.nupkg
+  name: NuGet
+- path: .\Artifacts\**\*.xml
+  name: xUnit Test Results
+
+deploy:
+- provider: NuGet
+  server: https://www.myget.org/F/nsarris/api/v2/package
+  api_key:
+    secure: oCcFfuNnxI4ng/H0WAIBxyD/3UisznKgApuMgBZlC99fINvj1l6CH0UeKCN25uJi
+  skip_symbols: true
+  on:
+    branch: develop
+- provider: NuGet
+  name: production
+  api_key:
+    secure: Xnmi7G3a+NqP0A7Fmyej32H/tTknfpGVMuqGtHw8SXYDxaGipBsffx7Qa+XF8EIM
+  on:
+    branch: master
+    appveyor_repo_tag: true

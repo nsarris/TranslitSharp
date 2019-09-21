@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranslitSharp", "src\TranslitSharp\TranslitSharp.csproj", "{7B4BF4CB-843B-46F3-A42D-0666680F4EE1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranslitSharp.Tests", "tests\TranslitSharp.Tests\TranslitSharp.Tests.csproj", "{98E05B04-B44E-441C-8FB9-59B92CDFDEE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B4BF4CB-843B-46F3-A42D-0666680F4EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B4BF4CB-843B-46F3-A42D-0666680F4EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B4BF4CB-843B-46F3-A42D-0666680F4EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B4BF4CB-843B-46F3-A42D-0666680F4EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E05B04-B44E-441C-8FB9-59B92CDFDEE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E05B04-B44E-441C-8FB9-59B92CDFDEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E05B04-B44E-441C-8FB9-59B92CDFDEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E05B04-B44E-441C-8FB9-59B92CDFDEE6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33A18B9C-CCBD-40BB-A2FE-4A4E8BDD35AB}
+	EndGlobalSection
+EndGlobal
