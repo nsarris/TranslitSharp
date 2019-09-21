@@ -4,20 +4,15 @@ image: Visual Studio 2019
 
 pull_requests:
   do_not_increment_build_number: true
+  
+branches:
+  only:
+  - master
+  - develop
 
 nuget:
   disable_publish_on_pr: true
 
- branches:
-  only:
-  - master
-  - develop
-  
-skip_commits:
-  files:
-    - LICENSE
-    - README.md
-	
 environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
@@ -33,6 +28,11 @@ build_script:
 
 assembly_info:
   patch: false
+  
+skip_commits:
+  files:
+    - LICENSE
+    - README.md
 
 test: on
 
