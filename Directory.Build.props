@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <Authors>Nikos Sarris</Authors>
+    <Company></Company>
+    <Product>TranslitSharp</Product>
+    <Description>c# Transliterator</Description>
+    <Copyright>© Nikos Sarris</Copyright>
+    <PackageProjectUrl>https://github.com/nsarris/TranslitSharp</PackageProjectUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <RepositoryUrl>https://github.com/nsarris/TranslitSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags></PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+  </PropertyGroup>
+</Project>

@@ -20,8 +20,6 @@ environment:
 install:
   - ps: dotnet tool install --global Cake.Tool --version 0.34.1
 
-configuration: Release
-
 build_script:
   - ps: dotnet cake build.cake --bootstrap
   - ps: dotnet cake build.cake --pack
@@ -34,26 +32,65 @@ skip_commits:
     - LICENSE
     - README.md
 
-test: on
+#tests run manually in cake script to allow xml results to be uploaded in build artifacts
+#set to on and run build script with --notests to have appveyor run the tests and handle results
+test: off
 
 artifacts:
-- path: .\artifacts\**\*.nupkg
-  name: NuGet
+#nuget artifacts uploaded in cake script in order to skip package artifacts on pull request builds
+#enable below and remove the "PublishAppVeyorArtifacts" task to have appveyor handle nuget artifacts
+#- path: .\artifacts\**\*.nupkg
+#  name: NuGet
 - path: .\Artifacts\**\*.xml
   name: xUnit Test Results
 
 deploy:
-- provider: NuGet
-  server: https://www.myget.org/F/nsarris/api/v2/package
-  api_key:
-    secure: oCcFfuNnxI4ng/H0WAIBxyD/3UisznKgApuMgBZlC99fINvj1l6CH0UeKCN25uJi
-  skip_symbols: true
+- provider: GitHub
+  release: v$(appveyor_build_version)
+  tag: $(APPVEYOR_REPO_TAG_NAME)
+  auth_token:
+    secure: WWyoRtwhic6YmQW9Y92co1Spea5uKJ82UfcZ8lzZPp3YOQnzCU7V7RX9R7bXqbmx
+  artifact: /.*\.nupkg/
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    APPVEYOR_REPO_TAG: true
+- provider: GitHub
+  release: v$(APPVEYOR_BUILD_VERSION)
+  auth_token:
+    secure: WWyoRtwhic6YmQW9Y92co1Spea5uKJ82UfcZ8lzZPp3YOQnzCU7V7RX9R7bXqbmx
+  artifact: /.*\.nupkg/
+  draft: false
+  prerelease: true
   on:
     branch: develop
 - provider: NuGet
   name: production
   api_key:
     secure: Xnmi7G3a+NqP0A7Fmyej32H/tTknfpGVMuqGtHw8SXYDxaGipBsffx7Qa+XF8EIM
+  skip_symbols: true
   on:
     branch: master
     appveyor_repo_tag: true
+- provider: NuGet
+  server: https://www.myget.org/F/nsarris/api/v2/package
+  symbol_server: https://www.myget.org/F/nsarris-citest/symbols/api/v2/package
+  api_key:
+    secure: oCcFfuNnxI4ng/H0WAIBxyD/3UisznKgApuMgBZlC99fINvj1l6CH0UeKCN25uJi
+  skip_symbols: false
+  on:
+    branch: develop
+
+for:
+- branches:
+    only:
+      - master
+
+  skip_non_tags: true	
+
+- branches:
+    only:
+      - develop
+
+  skip_tags: true	
