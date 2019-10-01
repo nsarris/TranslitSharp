@@ -96,5 +96,16 @@ namespace TranslitSharp.Tests
             var result = transliterator.Transliterate("AA");
             Assert.Equal("22", result);
         }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("  ")]
+        [InlineData("")]
+        public void Should_Handle_Null_EmptyString_WhiteSpace(string input)
+        {
+            var transliterator = new Transliterator();
+            var result = transliterator.Transliterate(input);
+            Assert.Equal(input, result);
+        }
     }
 }
