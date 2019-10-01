@@ -65,6 +65,8 @@ namespace TranslitSharp
 
         public string Transliterate(string text, TransliterationOptions options = null)
         {
+            if (string.IsNullOrEmpty(text)) return text;
+
             ICharCollection currentText = new StringCharCollection(text);
 
             foreach (var token in tokenMapsPerLength)
