@@ -75,6 +75,12 @@ namespace TranslitSharp
             //}
         }
 
-        public static bool IsAscii(this char c) => (c >> 8) == 0;
+        public static bool IsAscii(this char c, bool excludeExtendedAscii)
+        {
+            if (excludeExtendedAscii)
+                return ((int)c) < 128;
+            else
+                return (c >> 8) == 0;
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace TranslitSharp
 
         internal List<CharacterMap> CustomMaps { get; } = new List<CharacterMap>();
         internal string NonAsciiCharacterReplacement { get; set; }
+        internal bool ExcludeExtendedAsciiCharacters { get; set; }
         internal DuplicateTokenBehaviour DuplicateTokenBehaviour { get; set; }
 
         public TransliteratorConfiguration OnDuplicateToken(DuplicateTokenBehaviour behaviour)
@@ -28,6 +29,19 @@ namespace TranslitSharp
         public TransliteratorConfiguration ReplaceRemainingNonAsciiCharacters(string replacement)
         {
             NonAsciiCharacterReplacement = replacement;
+            return this;
+        }
+        public TransliteratorConfiguration ReplaceRemainingNonExtendedAsciiCharacters()
+        {
+            NonAsciiCharacterReplacement = defaultAsciiReplacementChar;
+            ExcludeExtendedAsciiCharacters = true;
+            return this;
+        }
+
+        public TransliteratorConfiguration ReplaceRemainingNonExtendedAsciiCharacters(string replacement)
+        {
+            NonAsciiCharacterReplacement = replacement;
+            ExcludeExtendedAsciiCharacters = true;
             return this;
         }
 

@@ -113,10 +113,10 @@ namespace TranslitSharp
                     currentText = new StringBuilderCharCollection(stringBuilder);
             }
 
-            return ReplaceNonAsciiCharacters(currentText, configuration.NonAsciiCharacterReplacement);
+            return ReplaceNonAsciiCharacters(currentText, configuration.NonAsciiCharacterReplacement, configuration.ExcludeExtendedAsciiCharacters);
         }
 
-        private string ReplaceNonAsciiCharacters(ICharCollection text, string replacement)
+        private string ReplaceNonAsciiCharacters(ICharCollection text, string replacement, bool excludeExtended)
         {
             if (replacement == null)
                 return text.ToString();
@@ -125,7 +125,7 @@ namespace TranslitSharp
 
             foreach(var c in text)
             {
-                if (c.IsAscii())
+                if (c.IsAscii(excludeExtended))
                     stringBuilder.Append(c);
                 else
                     stringBuilder.Append(replacement);

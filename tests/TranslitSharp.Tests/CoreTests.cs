@@ -63,6 +63,19 @@ namespace TranslitSharp.Tests
             Assert.Equal(expected, result);
         }
 
+
+        [Theory]
+        [InlineData("€υρώ", "?yro")]
+        public void Should_Transliterate_And_Replace_NonExtended_ASCII(string input, string expected)
+        {
+            var transliterator = new Transliterator(x => x
+                .ConfigureGreekToLatin()
+                .ReplaceRemainingNonExtendedAsciiCharacters());
+
+            var result = transliterator.Transliterate(input);
+            Assert.Equal(expected, result);
+        }
+
         [Fact]
         public void Should_Throw_Exception_On_Duplicate()
         {
