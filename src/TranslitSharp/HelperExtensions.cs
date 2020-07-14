@@ -48,7 +48,6 @@ namespace TranslitSharp
         {
             if (length <= 0) return 0;
             if (length == 1) return characters.First().GetHashCode();
-            if (length == 2) return seed * (first_hash_seed + characters.First().GetHashCode()) + characters.Last().GetHashCode();
 
             int hash1 = 5381;
             int hash2 = hash1;
@@ -65,14 +64,6 @@ namespace TranslitSharp
             }
 
             return hash1 + (hash2 * 1566083941);
-
-            //unchecked
-            //{
-            //    int hash = 17;
-            //    foreach (var character in characters)
-            //        hash = 31 * hash + character.GetHashCode();
-            //    return hash;
-            //}
         }
 
         public static bool IsAscii(this char c, bool excludeExtendedAscii)

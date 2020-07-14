@@ -21,6 +21,7 @@ namespace TranslitSharp.Tests
         [InlineData("ψάρι", "psari")]
         [InlineData("ΨΑΡΙ", "PSARI")]
         [InlineData("ΨΑρι", "PSAri")]
+        [InlineData("ΠΑΠΑΔΟΠΟΥΛΟΣ", "PAPADOPOULOS")]
         public void Should_Transliterate_Greek_To_Latin(string input, string expected)
         {
             var transliterator = new Transliterator(x => x
