@@ -40,15 +40,15 @@ namespace TranslitSharp
             return GetHashCodeFromCharacters(text, text.Length);
         }
 
-        private const int hash = 17;
-        private const int seed = 31;
+        private const int hash = 5381;
+        private const int seed = 1566083941;
 
         public static int GetHashCodeFromCharacters(this IEnumerable<char> characters, int length)
         {
             if (length <= 0) return 0;
             if (length == 1) return characters.First().GetHashCode();
 
-            int hash1 = 5381;
+            int hash1 = hash;
             int hash2 = hash1;
 
             int i = 0;
@@ -62,7 +62,7 @@ namespace TranslitSharp
                 if (++i == 2) i = 0;
             }
 
-            return hash1 + (hash2 * 1566083941);
+            return hash1 + (hash2 * seed);
         }
 
         public static bool IsAscii(this char c, bool excludeExtendedAscii)
