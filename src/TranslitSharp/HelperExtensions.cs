@@ -42,7 +42,6 @@ namespace TranslitSharp
 
         private const int hash = 17;
         private const int seed = 31;
-        private const int first_hash_seed = hash * seed;
 
         public static int GetHashCodeFromCharacters(this IEnumerable<char> characters, int length)
         {
