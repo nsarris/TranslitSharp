@@ -49,7 +49,7 @@ deploy:
   release: v$(appveyor_build_version)
   tag: $(APPVEYOR_REPO_TAG_NAME)
   auth_token:
-    secure: WWyoRtwhic6YmQW9Y92co1Spea5uKJ82UfcZ8lzZPp3YOQnzCU7V7RX9R7bXqbmx
+    secure: DNoZGQZLXHA3ng7jbMAzvEzWJtU56Jqqh45Bs312Fzl7kpxaGF0uf2KmyOHaLNeH
   artifact: /.*\.nupkg/
   draft: false
   prerelease: false
@@ -59,7 +59,7 @@ deploy:
 - provider: GitHub
   release: v$(APPVEYOR_BUILD_VERSION)
   auth_token:
-    secure: WWyoRtwhic6YmQW9Y92co1Spea5uKJ82UfcZ8lzZPp3YOQnzCU7V7RX9R7bXqbmx
+    secure: DNoZGQZLXHA3ng7jbMAzvEzWJtU56Jqqh45Bs312Fzl7kpxaGF0uf2KmyOHaLNeH
   artifact: /.*\.nupkg/
   draft: false
   prerelease: true
@@ -68,7 +68,7 @@ deploy:
 - provider: NuGet
   name: production
   api_key:
-    secure: g2qVqxca/cy1Hs878eQ+RR0yYrEHYQBvGF4KCzOsIlzYxk7E2Hfw0VQcsYobmWLk
+    secure: xSJzKPcE/5dqG25RH04nOMV22HpKI7ypZorkYcOe6Y1imKS7sPWG8Cz/kvP1XiZE
   skip_symbols: true
   on:
     branch: master
