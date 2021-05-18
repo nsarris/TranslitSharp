@@ -7,7 +7,7 @@ namespace TranslitSharp
         public CharacterMap(string token, string replacementToken, TransliterationTokenHandler handler = null)
         {
             if (string.IsNullOrEmpty(token)) throw new ArgumentNullException(nameof(token));
-            if (string.IsNullOrEmpty(replacementToken)) throw new ArgumentNullException(nameof(token));
+            if (replacementToken is null) throw new ArgumentNullException(nameof(token));
 
             Token = token;
             Handler = handler;
