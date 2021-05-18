@@ -120,5 +120,17 @@ namespace TranslitSharp.Tests
             var result = transliterator.Transliterate(input);
             Assert.Equal(input, result);
         }
+
+        [Theory]
+        [InlineData("123","2","13")]
+        [InlineData("123", "1", "23")]
+        [InlineData("123", "3", "12")]
+        [InlineData("123", "a", "123")]
+        public void Shoud_Handle_EmptyString_ReplacementToken(string input, string replace, string expected)
+        {
+            var transliterator = new Transliterator(x => x.AddCharacterMap(replace, ""));
+            var result = transliterator.Transliterate(input);
+            Assert.Equal(expected, result);
+        }
     }
 }

@@ -32,7 +32,8 @@ namespace TranslitSharp
                                   : char.ToLower(array[j]);
                 listPermutations.Add(new string(array));
             }
-            return listPermutations;
+
+            return listPermutations.Distinct().ToList();
         }
 
         public static int GetHashCodeFromCharacters(this string text)

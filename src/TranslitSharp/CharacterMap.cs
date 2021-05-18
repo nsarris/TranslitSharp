@@ -18,9 +18,11 @@ namespace TranslitSharp
             }
             else
             {
-                TransileratedCapitalizeFirst = replacementToken.Substring(0, 1).ToUpper() + replacementToken.Substring(1).ToLower();
                 TransliteratedLower = replacementToken.ToLower();
                 TransliteratedUpper = replacementToken.ToUpper();
+                TransileratedCapitalizeFirst = replacementToken.Length == 0 ? 
+                    TransliteratedUpper :
+                    replacementToken.Substring(0, 1).ToUpper() + replacementToken.Substring(1).ToLower();
             }
         }
 
