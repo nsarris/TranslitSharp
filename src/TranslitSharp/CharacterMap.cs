@@ -7,7 +7,7 @@ namespace TranslitSharp
         public CharacterMap(string token, string replacementToken, TransliterationTokenHandler handler = null)
         {
             if (string.IsNullOrEmpty(token)) throw new ArgumentNullException(nameof(token));
-            if (string.IsNullOrEmpty(replacementToken)) throw new ArgumentNullException(nameof(token));
+            if (replacementToken is null) throw new ArgumentNullException(nameof(token));
 
             Token = token;
             Handler = handler;
@@ -18,9 +18,11 @@ namespace TranslitSharp
             }
             else
             {
-                TransileratedCapitalizeFirst = replacementToken.Substring(0, 1).ToUpper() + replacementToken.Substring(1).ToLower();
                 TransliteratedLower = replacementToken.ToLower();
                 TransliteratedUpper = replacementToken.ToUpper();
+                TransileratedCapitalizeFirst = replacementToken.Length == 0 ? 
+                    TransliteratedUpper :
+                    replacementToken.Substring(0, 1).ToUpper() + replacementToken.Substring(1).ToLower();
             }
         }
 
