@@ -41,6 +41,7 @@ namespace TranslitSharp.Tests
         [InlineData("σαλάμι αέρος", "salami aeros", CaseConversion.None)]
         [InlineData("σαλάμι αέρος", "SALAMI AEROS", CaseConversion.ToUpper)]
         [InlineData("σαλάμι αέρος", "salami aeros", CaseConversion.ToLower)]
+        [InlineData("σαλάμι αέρος abc", "SALAMI AEROS ABC", CaseConversion.ToUpper)]
         public void Should_Transliterate_With_CaseConversion(string input, string expected, CaseConversion caseConversion)
         {
             var transliterator = new Transliterator(x => x
@@ -130,6 +131,18 @@ namespace TranslitSharp.Tests
         {
             var transliterator = new Transliterator(x => x.AddCharacterMap(replace, ""));
             var result = transliterator.Transliterate(input);
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData("1111111111", "1", "abcd", "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", 1)]
+        [InlineData("1111111111", "1", "abcd", "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", 10)]
+        [InlineData("1111111111", "1", "abcd", "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", 100)]
+        [InlineData("123", "2", "abcd", "1abcd3", 1)]
+        public void Shoud_Increase_Capacity(string input, string replace, string replaceWith, string expected, int estimatedLength)
+        {
+            var transliterator = new Transliterator(x => x.AddCharacterMap(replace, replaceWith));
+            var result = transliterator.Transliterate(input, new TransliterationOptions(estimatedLength: estimatedLength));
             Assert.Equal(expected, result);
         }
     }

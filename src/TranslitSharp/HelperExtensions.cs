@@ -7,16 +7,6 @@ namespace TranslitSharp
 {
     internal static class HelperExtensions
     {
-        public static StringBuilder AppendChars(this StringBuilder stringBuilder, IEnumerable<char> characters, int length = 0)
-        {
-            if (length > 0)
-                stringBuilder.EnsureCapacity(stringBuilder.Capacity + length);
-
-            foreach (var c in characters)
-                stringBuilder.Append(c);
-            return stringBuilder;
-        }
-
         public static List<string> Permute(this string s)
         {
             List<string> listPermutations = new List<string>();
@@ -36,42 +26,44 @@ namespace TranslitSharp
             return listPermutations.Distinct().ToList();
         }
 
-        public static int GetHashCodeFromCharacters(this string text)
-        {
-            return GetHashCodeFromCharacters(text, text.Length);
-        }
-
         private const int hash = 5381;
         private const int seed = 1566083941;
 
-        public static int GetHashCodeFromCharacters(this IEnumerable<char> characters, int length)
+        public static int GetHashCodeFromCharacters(this string text)
+        {
+            return GetHashCodeFromCharacters(text, 0, text.Length);
+        }
+
+        public static int GetHashCodeFromCharacters(this string text, int startIndex, int length)
         {
             if (length <= 0) return 0;
-            if (length == 1) return characters.First().GetHashCode();
+            if (length == 1) return text[startIndex].GetHashCode();
 
-            int hash1 = hash;
-            int hash2 = hash1;
+            var hash1 = hash;
+            var hash2 = hash;
 
-            int i = 0;
-            foreach (var character in characters)
+            for (var i = 0; i < length; i++)
             {
-                if (i == 0)
-                    hash1 = ((hash1 << 5) + hash1) ^ character;
+                if (i % 2 == 0)
+                    hash1 = ((hash1 << 5) + hash1) ^ text[startIndex + i];
                 else
-                    hash2 = ((hash2 << 5) + hash2) ^ character;
-
-                if (++i == 2) i = 0;
+                    hash2 = ((hash2 << 5) + hash2) ^ text[startIndex + i];
             }
 
             return hash1 + (hash2 * seed);
         }
 
-        public static bool IsAscii(this char c, bool excludeExtendedAscii)
-        {
-            if (excludeExtendedAscii)
-                return ((int)c) < 128;
-            else
-                return (c >> 8) == 0;
-        }
+        public static bool IsAscii(this char c, bool excludeExtendedAscii) 
+            => excludeExtendedAscii ? c < 128 : (c >> 8) == 0;
+
+        public static char ToCase(this char c, CaseConversion? caseConversion)
+            => caseConversion switch
+            {
+                null => c,
+                CaseConversion.None => c,
+                CaseConversion.ToUpper => char.ToUpper(c),
+                CaseConversion.ToLower => char.ToLower(c),
+                _ => throw new ArgumentOutOfRangeException(nameof(caseConversion))
+            };
     }
 }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Nikos Sarris</Authors>
     <Company />
@@ -10,6 +10,8 @@
     <RepositoryUrl>https://github.com/nsarris/TranslitSharp</RepositoryUrl>
     <RepositoryType />
     <PackageTags>transliteration</PackageTags>
+	<LangVersion>10</LangVersion>
+	<Version>1.1.0</Version>
   </PropertyGroup>
 
 </Project>

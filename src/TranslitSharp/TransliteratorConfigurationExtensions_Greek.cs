@@ -4,49 +4,51 @@
     {
         public static TransliteratorConfiguration ConfigureGreekToLatin(this TransliteratorConfiguration configuration)
             => configuration
-                .AddCharacterMap("Α", "A")
-                .AddCharacterMap("Ά", "A")
-                .AddCharacterMap("Β", "V")
-                .AddCharacterMap("Γ", "G")
-                .AddCharacterMap("Δ", "D")
-                .AddCharacterMap("Ε", "E")
-                .AddCharacterMap("Έ", "E")
-                .AddCharacterMap("Ζ", "Z")
-                .AddCharacterMap("Η", "I")
-                .AddCharacterMap("Ή", "I")
-                .AddCharacterMap("Θ", "TH")
-                .AddCharacterMap("Ι", "I")
-                .AddCharacterMap("Ϊ", "I")
-                .AddCharacterMap("Ί", "I")
-                .AddCharacterMap("ΐ", "i", map => map.AddAllCasePermutations = false)
-                .AddCharacterMap("Κ", "K")
-                .AddCharacterMap("Λ", "L")
-                .AddCharacterMap("Μ", "M")
-                .AddCharacterMap("Ν", "N")
-                .AddCharacterMap("Ξ", "X")
-                .AddCharacterMap("Ο", "O")
-                .AddCharacterMap("Ό", "O")
-                .AddCharacterMap("Π", "P")
-                .AddCharacterMap("Ρ", "R")
-                .AddCharacterMap("Σ", "S")
-                .AddCharacterMap("ς", "s", map => map.AddAllCasePermutations = false)
-                .AddCharacterMap("Τ", "T")
-                .AddCharacterMap("Υ", "Y", map => map.Handler = GreekYpsilonTransliterationTokenHandler.Instance)
-                .AddCharacterMap("Ύ", "Y", map => map.Handler = GreekYpsilonTransliterationTokenHandler.Instance)
-                .AddCharacterMap("Ϋ", "Y", map => map.Handler = GreekYpsilonTransliterationTokenHandler.Instance)
-                .AddCharacterMap("ΰ", "y", map => { map.Handler = GreekYpsilonTransliterationTokenHandler.Instance; map.AddAllCasePermutations = false; })
-                .AddCharacterMap("Φ", "F")
-                .AddCharacterMap("Χ", "CH")
-                .AddCharacterMap("Ψ", "PS")
-                .AddCharacterMap("Ω", "O")
-                .AddCharacterMap("Ώ", "O")
-                .AddCharacterMap("ΟΥ", "OU")
-                .AddCharacterMap("ΟΎ", "OU")
-                .AddCharacterMap("ΌΎ", "OU")
-                .AddCharacterMap("Ό" + "Υ", "OU")
-                .AddCharacterMap("ΜΠ", "MP", map => map.Handler = GreekMpTransliterationTokenHandler.Instance)
-                .AddCharacterMap("ΓΓ", "NG")
-                .AddCharacterMap("ΓΧ", "NCH")
-                .AddCharacterMap("ΓΞ", "NX");
+            .AddCharacterMaps(
+                ("Α", "A"),
+                ("Ά", "A"),
+                ("Β", "V"),
+                ("Γ", "G"),
+                ("Δ", "D"),
+                ("Ε", "E"),
+                ("Έ", "E"),
+                ("Ζ", "Z"),
+                ("Η", "I"),
+                ("Ή", "I"),
+                ("Θ", "TH"),
+                ("Ι", "I"),
+                ("Ϊ", "I"),
+                ("Ί", "I"),
+                ("Κ", "K"),
+                ("Λ", "L"),
+                ("Μ", "M"),
+                ("Ν", "N"),
+                ("Ξ", "X"),
+                ("Ο", "O"),
+                ("Ό", "O"),
+                ("Π", "P"),
+                ("Ρ", "R"),
+                ("Σ", "S"),
+                ("Τ", "T"),
+                ("Φ", "F"),
+                ("Χ", "CH"),
+                ("Ψ", "PS"),
+                ("Ω", "O"),
+                ("Ώ", "O"),
+                ("ΟΥ", "OU"),
+                ("ΟΎ", "OU"),
+                ("ΌΎ", "OU"),
+                ("ΌΥ", "OU"),
+                ("ΓΓ", "NG"),
+                ("ΓΧ", "NCH"),
+                ("ΓΞ", "NX"))
+            .AddCharacterMaps(
+                ("ΐ", "i", map => map.AddAllCasePermutations = false),
+                ("ς", "s", map => map.AddAllCasePermutations = false),
+                ("Υ", "Y", map => map.Handler = GreekYpsilonTransliterationTokenHandler.Instance),
+                ("Ύ", "Y", map => map.Handler = GreekYpsilonTransliterationTokenHandler.Instance),
+                ("Ϋ", "Y", map => map.Handler = GreekYpsilonTransliterationTokenHandler.Instance),
+                ("ΰ", "y", map => { map.Handler = GreekYpsilonTransliterationTokenHandler.Instance; map.AddAllCasePermutations = false; }),
+                ("ΜΠ", "MP", map => map.Handler = GreekMpTransliterationTokenHandler.Instance));
     }
 }
