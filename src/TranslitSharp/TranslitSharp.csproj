@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/nsarris/TranslitSharp</RepositoryUrl>
     <RepositoryType />
     <PackageTags>transliteration</PackageTags>
-	<LangVersion>10</LangVersion>
+	<LangVersion>9</LangVersion>
 	<Version>1.1.0</Version>
   </PropertyGroup>
 
