@@ -4,37 +4,37 @@
     {        
         public static TransliteratorConfiguration ConfigureLatin1SupplementToLatin(this TransliteratorConfiguration configuration)
             => configuration
-                .AddCharacterMap("À", "A")
-                .AddCharacterMap("Á", "A")
-                .AddCharacterMap("Â", "A")
-                .AddCharacterMap("Ã", "A")
-                .AddCharacterMap("Ä", "A")
-                .AddCharacterMap("Å", "A")
-                .AddCharacterMap("Æ", "A")
-                .AddCharacterMap("Ç", "C")
-                .AddCharacterMap("È", "E")
-                .AddCharacterMap("É", "E")
-                .AddCharacterMap("Ê", "E")
-                .AddCharacterMap("Ë", "E")
-                .AddCharacterMap("Ì", "I")
-                .AddCharacterMap("Í", "I")
-                .AddCharacterMap("Î", "I")
-                .AddCharacterMap("Ï", "I")
-                .AddCharacterMap("Ð", "E")
-                .AddCharacterMap("Ñ", "N")
-                .AddCharacterMap("Ò", "O")
-                .AddCharacterMap("Ó", "O")
-                .AddCharacterMap("Ô", "O")
-                .AddCharacterMap("Õ", "O")
-                .AddCharacterMap("Ö", "O")
-                .AddCharacterMap("Ø", "O")
-                .AddCharacterMap("Ù", "U")
-                .AddCharacterMap("Ú", "U")
-                .AddCharacterMap("Û", "U")
-                .AddCharacterMap("Ü", "U")
-                .AddCharacterMap("Ý", "Y")
-                .AddCharacterMap("Þ", "P")
-                .AddCharacterMap("ß", "S", map => map.AddAllCasePermutations = false)                
-            ;
+            .AddCharacterMaps(
+                ("Á", "A"),
+                ("Â", "A"),
+                ("Ã", "A"),
+                ("Ä", "A"),
+                ("Å", "A"),
+                ("Æ", "A"),
+                ("Ç", "C"),
+                ("È", "E"),
+                ("É", "E"),
+                ("Ê", "E"),
+                ("Ë", "E"),
+                ("Ì", "I"),
+                ("Í", "I"),
+                ("Î", "I"),
+                ("Ï", "I"),
+                ("Ð", "E"),
+                ("Ñ", "N"),
+                ("Ò", "O"),
+                ("Ó", "O"),
+                ("Ô", "O"),
+                ("Õ", "O"),
+                ("Ö", "O"),
+                ("Ø", "O"),
+                ("Ù", "U"),
+                ("Ú", "U"),
+                ("Û", "U"),
+                ("Ü", "U"),
+                ("Ý", "Y"),
+                ("Þ", "P"))
+            .AddCharacterMaps(
+                ("ß", "S", map => map.AddAllCasePermutations = false));
     }
 }

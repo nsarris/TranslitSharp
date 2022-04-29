@@ -7,7 +7,7 @@ namespace TranslitSharp
 {
     public class Transliterator
     {
-        private class TokenMapGroup
+        private sealed class TokenMapGroup
         {
             public int Length { get; set; }
             public IReadOnlyDictionary<int, CharacterMap> TokenMap { get; set; }
@@ -67,71 +67,74 @@ namespace TranslitSharp
         {
             if (string.IsNullOrEmpty(text)) return text;
 
-            ICharCollection currentText = new StringCharCollection(text);
-
-            foreach (var token in tokenMapsPerLength)
+            var currentTokenIndex = 0;
+            var stringBuilder = new StringBuilder(options?.EstimatedLength ?? text.Length);
+            var hasChanges = false;
+            
+            while (currentTokenIndex < text.Length)
             {
-                var stringBuilder = new StringBuilder(currentText.Length);
+                var match = false;
 
-                var lastTokenIndex = currentText.Length - token.Length;
-                var currentTokenIndex = 0;
-                var hasChanges = false;
-
-                while (currentTokenIndex <= lastTokenIndex)
+                foreach (var token in tokenMapsPerLength.Where(x => currentTokenIndex + x.Length <= text.Length))
                 {
-                    var tokenCharacters = currentText.Skip(currentTokenIndex).Take(token.Length);
-                    var currentTokenHashCode = tokenCharacters.GetHashCodeFromCharacters(token.Length);
-                    var isLastToken = currentTokenIndex == lastTokenIndex;
-
+                    var currentTokenHashCode = text.GetHashCodeFromCharacters(currentTokenIndex, token.Length);
+                    
                     if (token.TokenMap.TryGetValue(currentTokenHashCode, out var replacement))
                     {
+                        var tokenCharacters = text.Substring(currentTokenIndex, token.Length);
                         var nextTokenIndex = currentTokenIndex + token.Length;
+                        var isLastToken = nextTokenIndex == text.Length;
 
-                        var context = new TransliterationContext(tokenCharacters, token.Length, currentTokenIndex, nextTokenIndex, replacement, options, currentText, isLastToken);
+                        var context = new TransliterationContext(tokenCharacters, token.Length, currentTokenIndex, nextTokenIndex, replacement, options, text, isLastToken);
 
                         var handler = replacement.Handler ?? TransliterationTokenHandler.Instance;
 
                         var replacementToken = handler.Handle(context);
 
-                        stringBuilder.Append(replacementToken);
+                        AppendString(stringBuilder, replacementToken, ref hasChanges);
 
-                        hasChanges = true;
+                        if (!hasChanges)
+                            hasChanges = !tokenCharacters.Equals(replacementToken);
+
                         currentTokenIndex = nextTokenIndex;
-                    }
-                    else
-                    {
-                        if (isLastToken)
-                            stringBuilder.AppendChars(currentText.Skip(currentTokenIndex), currentText.Length - currentTokenIndex);
-                        else
-                            stringBuilder.Append(currentText[currentTokenIndex]);
-
-                        currentTokenIndex++;
+                        match = true;
+                        break;
                     }
                 }
 
-                if (hasChanges)
-                    currentText = new StringBuilderCharCollection(stringBuilder);
+                if (!match)
+                {
+                    AppendCharacter(stringBuilder, text[currentTokenIndex++].ToCase(options?.CaseConversion), ref hasChanges);
+                }
             }
 
-            return ReplaceNonAsciiCharacters(currentText, configuration.NonAsciiCharacterReplacement, configuration.ExcludeExtendedAsciiCharacters);
+            return hasChanges ? stringBuilder.ToString() : text;
         }
 
-        private string ReplaceNonAsciiCharacters(ICharCollection text, string replacement, bool excludeExtended)
+        private void AppendString(StringBuilder stringBuilder, string characters, ref bool hasChanges)
         {
-            if (replacement == null)
-                return text.ToString();
+            for(var i = 0; i < characters.Length; i++)
+                AppendCharacter(stringBuilder, characters[i], ref hasChanges);
+        }
 
-            var stringBuilder = new StringBuilder(text.Length);
-
-            foreach(var c in text)
+        private void AppendCharacter(StringBuilder stringBuilder, char character, ref bool hasChanges)
+        {
+            if (ShouldReplaceNonAsciiCharacter(character))
             {
-                if (c.IsAscii(excludeExtended))
-                    stringBuilder.Append(c);
-                else
-                    stringBuilder.Append(replacement);
-            }
+                if (!hasChanges)
+                    hasChanges = configuration.NonAsciiCharacterReplacement.Length != 1
+                        || configuration.NonAsciiCharacterReplacement[0] != character;
 
-            return stringBuilder.ToString();
+                stringBuilder.Append(configuration.NonAsciiCharacterReplacement);
+            }
+            else
+                stringBuilder.Append(character);
+        }
+
+        private bool ShouldReplaceNonAsciiCharacter(char character)
+        {
+            return configuration.NonAsciiCharacterReplacement is not null
+                && !character.IsAscii(configuration.ExcludeExtendedAsciiCharacters);
         }
     }
 }

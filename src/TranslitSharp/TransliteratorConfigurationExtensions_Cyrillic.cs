@@ -4,90 +4,93 @@
     {
         private static TransliteratorConfiguration ConfigureCyrillicToLatinBase(this TransliteratorConfiguration configuration)
             => configuration
-                .AddCharacterMap("А", "A")
-                .AddCharacterMap("Б", "B")
-                .AddCharacterMap("В", "V")
-                .AddCharacterMap("Г", "G")
-                .AddCharacterMap("Д", "D")
-                .AddCharacterMap("Е", "E")
-                .AddCharacterMap("И", "I")
-                .AddCharacterMap("Й", "J")
-                .AddCharacterMap("К", "K")
-                .AddCharacterMap("Л", "L")
-                .AddCharacterMap("М", "M")
-                .AddCharacterMap("Н", "N")
-                .AddCharacterMap("О", "O")
-                .AddCharacterMap("П", "P")
-                .AddCharacterMap("Р", "R")
-                .AddCharacterMap("С", "S")
-                .AddCharacterMap("Т", "T")
-                .AddCharacterMap("У", "U")
-                .AddCharacterMap("Ф", "F")
-                .AddCharacterMap("Х", "H")
-                .AddCharacterMap("Ц", "C")
-                .AddCharacterMap("Ы", "Y");
+            .AddCharacterMaps(
+                ("А", "A"),
+                ("Б", "B"),
+                ("В", "V"),
+                ("Г", "G"),
+                ("Д", "D"),
+                ("Е", "E"),
+                ("И", "I"),
+                ("Й", "J"),
+                ("К", "K"),
+                ("Л", "L"),
+                ("М", "M"),
+                ("Н", "N"),
+                ("О", "O"),
+                ("П", "P"),
+                ("Р", "R"),
+                ("С", "S"),
+                ("Т", "T"),
+                ("У", "U"),
+                ("Ф", "F"),
+                ("Х", "H"),
+                ("Ц", "C"),
+                ("Ы", "Y"));
 
 
         public static TransliteratorConfiguration ConfigureCyrillicToLatin(this TransliteratorConfiguration configuration)
             => configuration
-                .ConfigureCyrillicToLatinBase()
-                .AddCharacterMap("Ґ", "G")
-                .AddCharacterMap("Ѓ", "G")
-                .AddCharacterMap("Ђ", "D")
-                .AddCharacterMap("Ё", "E")
-                .AddCharacterMap("Є", "E")
-                .AddCharacterMap("Ж", "Z")
-                .AddCharacterMap("З", "Z")
-                .AddCharacterMap("Ѕ", "Z")
-                .AddCharacterMap("I", "I")
-                .AddCharacterMap("Ї", "I")
-                .AddCharacterMap("Ј", "J")
-                .AddCharacterMap("Љ", "L")
-                .AddCharacterMap("Њ", "N")
-                .AddCharacterMap("Ќ", "K")
-                .AddCharacterMap("Ћ", "C")
-                .AddCharacterMap("Ў", "U")
-                .AddCharacterMap("Ч", "C")
-                .AddCharacterMap("Џ", "D")
-                .AddCharacterMap("Ш", "S")
-                .AddCharacterMap("Щ", "S")
-                .AddCharacterMap("Ѣ", "E")
-                .AddCharacterMap("Э", "E")
-                .AddCharacterMap("Ю", "U")
-                .AddCharacterMap("Я", "A")
-                .AddCharacterMap("Ѫ", "A")
-                .AddCharacterMap("Ѳ", "F")
-                .AddCharacterMap("Ѵ", "Y");
+            .ConfigureCyrillicToLatinBase()
+            .AddCharacterMaps(
+                ("Ґ", "G"),
+                ("Ѓ", "G"),
+                ("Ђ", "D"),
+                ("Ё", "E"),
+                ("Є", "E"),
+                ("Ж", "Z"),
+                ("З", "Z"),
+                ("Ѕ", "Z"),
+                ("I", "I"),
+                ("Ї", "I"),
+                ("Ј", "J"),
+                ("Љ", "L"),
+                ("Њ", "N"),
+                ("Ќ", "K"),
+                ("Ћ", "C"),
+                ("Ў", "U"),
+                ("Ч", "C"),
+                ("Џ", "D"),
+                ("Ш", "S"),
+                ("Щ", "S"),
+                ("Ѣ", "E"),
+                ("Э", "E"),
+                ("Ю", "U"),
+                ("Я", "A"),
+                ("Ѫ", "A"),
+                ("Ѳ", "F"),
+                ("Ѵ", "Y"));
 
         public static TransliteratorConfiguration ConfigureCyrillicToUnicode(this TransliteratorConfiguration configuration)
             => configuration
-                .ConfigureCyrillicToLatinBase()
-                .AddCharacterMap("Ґ", "G̀")
-                .AddCharacterMap("Ѓ", "Ǵ")
-                .AddCharacterMap("Ђ", "Đ")
-                .AddCharacterMap("Ё", "Ë")
-                .AddCharacterMap("Є", "Ê")
-                .AddCharacterMap("Ж", "Ž")
-                .AddCharacterMap("З", "Z")
-                .AddCharacterMap("Ѕ", "Ẑ")
-                .AddCharacterMap("I", "Ì")
-                .AddCharacterMap("Ї", "Ï")
-                .AddCharacterMap("Ј", "J̌")
-                .AddCharacterMap("Љ", "L̂")
-                .AddCharacterMap("Њ", "N̂")
-                .AddCharacterMap("Ќ", "Ḱ")
-                .AddCharacterMap("Ћ", "Ć")
-                .AddCharacterMap("Ў", "Ŭ")
-                .AddCharacterMap("Ч", "Č")
-                .AddCharacterMap("Џ", "D̂")
-                .AddCharacterMap("Ш", "Š")
-                .AddCharacterMap("Щ", "Ŝ")
-                .AddCharacterMap("Ѣ", "Ě")
-                .AddCharacterMap("Э", "È")
-                .AddCharacterMap("Ю", "Û")
-                .AddCharacterMap("Я", "Â")
-                .AddCharacterMap("Ѫ", "Ǎ")
-                .AddCharacterMap("Ѳ", "F̀")
-                .AddCharacterMap("Ѵ", "Ỳ");
+            .ConfigureCyrillicToLatinBase()
+            .AddCharacterMaps(
+                ("Ґ", "G̀"),
+                ("Ѓ", "Ǵ"),
+                ("Ђ", "Đ"),
+                ("Ё", "Ë"),
+                ("Є", "Ê"),
+                ("Ж", "Ž"),
+                ("З", "Z"),
+                ("Ѕ", "Ẑ"),
+                ("I", "Ì"),
+                ("Ї", "Ï"),
+                ("Ј", "J̌"),
+                ("Љ", "L̂"),
+                ("Њ", "N̂"),
+                ("Ќ", "Ḱ"),
+                ("Ћ", "Ć"),
+                ("Ў", "Ŭ"),
+                ("Ч", "Č"),
+                ("Џ", "D̂"),
+                ("Ш", "Š"),
+                ("Щ", "Ŝ"),
+                ("Ѣ", "Ě"),
+                ("Э", "È"),
+                ("Ю", "Û"),
+                ("Я", "Â"),
+                ("Ѫ", "Ǎ"),
+                ("Ѳ", "F̀"),
+                ("Ѵ", "Ỳ"));
     }
 }

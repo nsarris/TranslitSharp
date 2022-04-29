@@ -11,9 +11,9 @@ namespace TranslitSharp
 
         public override string Handle(TransliterationContext context)
         {
-            if (!context.IsFirstToken && ypsilon_preceeding.Contains(context.CurrentText[context.CurrentTokenIndex - 1]))
+            if (!context.IsFirstToken && ypsilon_preceeding.Contains(context.OriginalText[context.CurrentTokenIndex - 1]))
             {
-                if (context.IsLastToken || ypsilon_trailing_to_f.Contains(context.CurrentText[context.NextTokenIndex]))
+                if (context.IsLastToken || ypsilon_trailing_to_f.Contains(context.OriginalText[context.NextTokenIndex]))
                     return context.CurrentTokenCase == TokenCase.Lower ? "f" : "F";
                 else
                     return context.CurrentTokenCase == TokenCase.Lower ? "v" : "V";

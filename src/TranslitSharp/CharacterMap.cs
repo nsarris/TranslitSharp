@@ -33,16 +33,14 @@ namespace TranslitSharp
         public string TransliteratedLower { get; }
 
         internal TransliterationTokenHandler Handler { get; }
-        
-        public string GetTransliterated(TokenCase letterCasing)
-        {
-            switch (letterCasing)
+
+        public string GetTransliterated(TokenCase letterCasing) 
+            => letterCasing switch
             {
-                case TokenCase.Sentence: return TransileratedCapitalizeFirst;
-                case TokenCase.Upper: return TransliteratedUpper;
-                case TokenCase.Lower: return TransliteratedLower;
-                default: return null;
-            }
-        }
+                TokenCase.Sentence => TransileratedCapitalizeFirst,
+                TokenCase.Upper => TransliteratedUpper,
+                TokenCase.Lower => TransliteratedLower,
+                _ => throw new ArgumentOutOfRangeException(nameof(letterCasing)),
+            };
     }
 }
