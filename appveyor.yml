@@ -49,7 +49,7 @@ deploy:
   release: v$(appveyor_build_version)
   tag: $(APPVEYOR_REPO_TAG_NAME)
   auth_token:
-    secure: DNoZGQZLXHA3ng7jbMAzvEzWJtU56Jqqh45Bs312Fzl7kpxaGF0uf2KmyOHaLNeH
+    secure: qG46z/8GOmuJx4VZKdMy7l1XPC+CRmXIV8t7uDIUxpPny0YG2y0UKAn+NAYEBz4O
   artifact: /.*\.nupkg/
   draft: false
   prerelease: false
